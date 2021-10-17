@@ -10,9 +10,10 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Login from './pages/auth/Login';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,42 +33,113 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Register from './pages/auth/Register';
+import ForgotPassword from './pages/auth/ForgotPassword';
+
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/tab1" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
+      <IonRouterOutlet>
+        <Route path="/register" component={Register} exact={true} />
+        <Route path="/forgot-password" component={ForgotPassword} exact={true} />
+        <Route path="/login" component={Login} exact={true} />
+        <Route exact path="/" render={() => <Redirect to="/login" />} />
+        <IonTabs>
+          <IonRouterOutlet>
+           <Route exact path="/home">
+             <Home />
+           </Route>
+           <Route exact path="/about">
+             <About />
+           </Route>
+           <Route path="/contact">
+             <Contact />
+           </Route>
+         <Route path="/register">
+             <Register/>
+         </Route>
+          <Route path="/forgot-password">
+             <ForgotPassword/>
+           </Route>
+           <Route path="/login">
+            <Login />
+           </Route>
+           <Route exact path="/">
+             <Redirect to="/login" />
+           </Route>
+         </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+           <IonTabButton tab="home" href="/home">
             <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
+             <IonLabel>Home</IonLabel>
+           </IonTabButton>
+           <IonTabButton tab="about" href="/about">
+             <IonIcon icon={ellipse} />
+             <IonLabel>About</IonLabel>
+         </IonTabButton>
+           <IonTabButton tab="contact" href="/contact">
             <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
+            <IonLabel>Contact Us</IonLabel>
+           </IonTabButton>
         </IonTabBar>
-      </IonTabs>
+        </IonTabs>
+        {/* <Route path="/home" component={Home} exact={true} />
+        <Route path="/about" component={About} exact={true} />
+        <Route path="/contact" component={Contact} exact={true} /> */}
+        
+        {/* <Route path="/dashboard/:id" component={Dashboard} exact={true} /> */}
+        
+      </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
+  // <IonApp>
+  //   <IonReactRouter>
+  //     <IonTabs>
+  //       <IonRouterOutlet>
+  //         <Route exact path="/dashboard" render={(props) => {
+  //             return isAuthed ? <DashboardPage {...props} /> : <LoginPage />;
+  //           }}/>
+  //         <Route exact path="/home">
+  //           <Home />
+  //         </Route>
+  //         <Route exact path="/about">
+  //           <About />
+  //         </Route>
+  //         <Route path="/contact">
+  //           <Contact />
+  //         </Route>
+  //       <Route path="/register">
+  //           <Register/>
+  //       </Route>
+  //        <Route path="/forgot-password">
+  //           <ForgotPassword/>
+  //         </Route>
+  //         <Route path="/login">
+  //           <Login />
+  //         </Route>
+  //         <Route exact path="/">
+  //           <Redirect to="/login" />
+  //         </Route>
+  //       </IonRouterOutlet>
+  //       <IonTabBar slot="bottom">
+  //         <IonTabButton tab="home" href="/home">
+  //           <IonIcon icon={triangle} />
+  //           <IonLabel>Home</IonLabel>
+  //         </IonTabButton>
+  //         <IonTabButton tab="about" href="/about">
+  //           <IonIcon icon={ellipse} />
+  //           <IonLabel>About</IonLabel>
+  //         </IonTabButton>
+  //         <IonTabButton tab="contact" href="/contact">
+  //           <IonIcon icon={square} />
+  //           <IonLabel>Contact Us</IonLabel>
+  //         </IonTabButton>
+  //       </IonTabBar>
+  //     </IonTabs>
+  //   </IonReactRouter>
+  // </IonApp>
 );
+
 
 export default App;
